@@ -1,0 +1,32 @@
+name: Node.js CI
+
+on: [commit]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: |
+          pwd
+          mkdir zips
+          projects=$( find ./ -name "package.json" )
+          for prj_file in ${projects} ; do
+            prj_dir=$( dirname $prj_file )
+            prj_name=$( cat ${prj_file} | jq -r '.name' )
+            echo "NODE LAMBDA IN ${prj_dir}"
+            (cd ${prj_dir} && npm run --if-present build-archive )
+            archive_name="${prj_dir}/${prj_name}.zip"
+            if ( [ -e "${archive_name}" ] ) then
+              mv "${archive_name}" zips
+            fi
+          done
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: all_lambdas
+          path: zips/*.zip
+        
+          

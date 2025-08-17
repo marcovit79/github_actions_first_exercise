@@ -1,5 +1,5 @@
 {
-  "name": "hello-world-lambda",
+  "name": "list-vpcs-lambda",
   "version": "1.0.0",
   "description": "Simple lambda example",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "lint:fix": "eslint . --fix",
     "build": "tsc",
     "run-local": "tsc && node -e \"require('./dist/index.js').handler()\" ",
-    "build-archive": "npm ci && tsc && (cd dist && zip -r ../hello-world-lambda.zip *)"
+    "build-archive": "npm ci && tsc && (cd dist && zip -r ../list-vpcs-lambda.zip *)"
   },
   "keywords": [],
   "author": "",
