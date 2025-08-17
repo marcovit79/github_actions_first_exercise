@@ -5,6 +5,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env: 
+      artifact_suffix: ${{ github.ref_type == 'branch' && format('{0}_{1}', github.ref_name, github.sha )|| github.ref_name }}
 
     steps:
       - name: Checkout
@@ -26,9 +28,5 @@ jobs:
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: all_lambdas_${{ github.sha }}
+          name: all_lambdas__${{ env.artifact_suffix }}
           path: zips/*.zip
-      - run: |
-          echo ${{ github.ref_name }}
-        
-          
