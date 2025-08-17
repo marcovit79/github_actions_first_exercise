@@ -21,5 +21,9 @@ jobs:
                -w Build -b ${{ github.event.inputs.tag }} --json number,url,workflowDatabaseId,databaseId \
               | jq -r '.[0].databaseId' \
           )
-          gh -R ${{ github.repository }} run download ${run_id}
+          echo "Finded build run id ${run_id} for tag ${{ github.event.inputs.tag }}"
+          echo "Download artifacts"
+          mkdir artifacts
+          gh -R ${{ github.repository }} run download -D artifacts ${run_id}
+          ls artifacts
               
