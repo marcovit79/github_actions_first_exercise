@@ -12,7 +12,7 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: List build action execution
+      - name: Look for build action execution and download artifacts
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -25,5 +25,10 @@ jobs:
           echo "Download artifacts"
           mkdir artifacts
           gh -R ${{ github.repository }} run download -D artifacts ${run_id}
+          ls artifacts
+      - name: Create draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
           ls artifacts
               
