@@ -31,4 +31,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           ls artifacts
+          gh -R ${{ github.repository }} create release -d \
+             --generate-notes --verify-tag \
+             -t ${{ github.event.inputs.tag }} \
+             --notes-start-tag ${{ github.event.inputs.tag }} \
+             artifacts/*
+
               
