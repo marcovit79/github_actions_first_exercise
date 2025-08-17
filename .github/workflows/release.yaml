@@ -32,7 +32,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          ls artifacts
+          find artifacts -name "*.zip" -type f
           gh -R ${{ github.repository }} release create -d \
              --verify-tag ${{ github.event.inputs.tag }} \
              -t ${{ github.event.inputs.tag }} \
