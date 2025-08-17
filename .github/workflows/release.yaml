@@ -32,10 +32,8 @@ jobs:
         run: |
           ls artifacts
           gh -R ${{ github.repository }} release create -d \
-             --generate-notes \
              --verify-tag ${{ github.event.inputs.tag }} \
              -t ${{ github.event.inputs.tag }} \
-             --notes-start-tag ${{ github.event.inputs.tag }} \
              artifacts/*
 
               
