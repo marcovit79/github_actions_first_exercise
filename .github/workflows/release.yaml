@@ -12,6 +12,14 @@ jobs:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: List build action execution
+      - name: Install GH
         run: |
-          gh -R marcovit79/github_actions_first_exercise run list -w build
+          wget https://github.com/cli/cli/releases/download/v2.76.2/gh_2.76.2_linux_amd64.deb
+          dpkg -i gh_2.76.2_linux_amd64.deb
+          gh --version
+          gh --help
+      - name: List build action execution
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh -R ${{ github.repository }} run list -w build
