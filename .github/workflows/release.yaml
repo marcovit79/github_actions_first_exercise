@@ -7,6 +7,8 @@ on:
         type: string
 
 name: Create Release
+permissions:
+  packages: write
 jobs:
   release:
     name: Create Release
