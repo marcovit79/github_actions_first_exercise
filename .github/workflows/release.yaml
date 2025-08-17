@@ -16,4 +16,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh -R ${{ github.repository }} run list -w build
+          gh -R ${{ github.repository }} run list -w Build \
+              | grep ${{ github.event.inputs.tag }}
