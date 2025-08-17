@@ -32,10 +32,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          find artifacts -name "*.zip" -type f
+          mkdir released_files
+          find artifacts -name "*.zip" -type f -exec cp {} released_files \;
           gh -R ${{ github.repository }} release create -d \
              --verify-tag ${{ github.event.inputs.tag }} \
              -t ${{ github.event.inputs.tag }} \
-             artifacts/*
+             released_files/*
 
               
