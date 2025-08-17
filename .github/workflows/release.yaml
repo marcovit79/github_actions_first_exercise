@@ -16,6 +16,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh -R ${{ github.repository }} run list \
-             -w Build -b ${{ github.event.inputs.tag }} --json number,url,workflowDatabaseId,databaseId
+          run_id=$( \
+            gh -R ${{ github.repository }} run list \
+               -w Build -b ${{ github.event.inputs.tag }} --json number,url,workflowDatabaseId,databaseId \
+              | jq -r '.[0].databaseId' \
+          )
+          gh -R ${{ github.repository }} run download ${run_id}
               
