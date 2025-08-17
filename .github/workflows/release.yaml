@@ -9,6 +9,7 @@ on:
 name: Create Release
 permissions:
   packages: write
+  deployments: write
 jobs:
   release:
     name: Create Release
