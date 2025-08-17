@@ -9,7 +9,7 @@
     "lint:fix": "eslint . --fix",
     "build": "tsc",
     "run-local": "tsc && node -e \"require('./dist/index.js').handler()\" ",
-    "build-archive": "npm ci && tsc && (cd dist && zip -r ../list-vpcs-lambda.zip *)"
+    "build-archive": "npm ci && tsc && NODE_ENV=production npm ci && (cd dist && zip -r ../list-vpcs-lambda.zip *) && (zip -r list-vpcs-lambda-liblayer.zip node_modules)"
   },
   "keywords": [],
   "author": "",
@@ -22,5 +22,6 @@
     "typescript-eslint": "^8.38.0"
   },
   "dependencies": {
+    "@aws-sdk/client-ec2": "^3.868.0"
   }
 }

@@ -20,9 +20,13 @@ jobs:
             prj_name=$( cat ${prj_file} | jq -r '.name' )
             echo "NODE LAMBDA IN ${prj_dir}"
             (cd ${prj_dir} && npm run --if-present build-archive )
-            archive_name="${prj_dir}/${prj_name}.zip"
-            if ( [ -e "${archive_name}" ] ) then
-              mv "${archive_name}" zips
+            lambda_archive_name="${prj_dir}/${prj_name}.zip"
+            libraries_archive_name="${prj_dir}/${prj_name}-liblayer.zip"
+            if ( [ -e "${lambda_archive_name}" ] ) then
+              mv "${lambda_archive_name}" zips
+            fi
+            if ( [ -e "${libraries_archive_name}" ] ) then
+              mv "${libraries_archive_name}" zips
             fi
           done
       - name: Upload Artifacts
