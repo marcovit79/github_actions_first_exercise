@@ -28,5 +28,7 @@ jobs:
         with:
           name: all_lambdas_${{ github.sha }}
           path: zips/*.zip
+      - run: |
+          echo ${{ github.ref_name }}
         
           
